@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>작성</title>
+        <link href="write.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <header class="write-header">
+            <div class="header-prev">
+                <button class="header-button" id="prev">이전</button>
+            </div>
+            <div class="header-save">
+                <button class="header-button" id="temp-save">임시저장</button>
+                <button class="header-button" id="save">저장</button>
+            </div>
+        </header>
+        <div class="write-title-space">
+            <input class="write-title" type="text" placeholder="제목을 입력하세요" onfocus="this.placeholder=''" onblur="this.placeholder='제목을 입력하세요'">
+        </div>
+        <br>
+        <div class="write-category">
+            <div class="write-category-text">
+                <button>폰트</button>
+                <button>굵기</button>
+                <button>색상</button>
+            </div>
+            <div class="write-category-draw">
+                <button>마우스커서</button>
+                <button>굵기</button>
+                <button>색</button>
+                <button>도형</button>
+                <button>지우개</button>
+                <button>전체 지우기</button>
+            </div>
+            <div class="write-category-imageInsert">
+                <button>이미지 삽입</button>
+            </div>
+        </div>
+        <hr>
+        <textarea class="write-textarea" placeholder="내용을 입력하세요." onfocus="this.placeholder=''" onblur="this.placeholder='내용을 입력하세요'"></textarea>
+    </body>
+</html>
