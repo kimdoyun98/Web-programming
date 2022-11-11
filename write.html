@@ -3,6 +3,7 @@
     <head>
         <title>작성</title>
         <link href="write.css" rel="stylesheet" type="text/css" />
+    
     </head>
     <body>
         <header class="write-header">
@@ -18,11 +19,23 @@
             <input class="write-title" type="text" placeholder="제목을 입력하세요" onfocus="this.placeholder=''" onblur="this.placeholder='제목을 입력하세요'">
         </div>
         <br>
+
         <div class="write-category">
             <div class="write-category-text">
-                <button>폰트</button>
-                <button>굵기</button>
-                <button>색상</button>
+                <select class="text-font-size" name="font-size" id="font-size" onchange="changeFontSize()">
+                    <option value="26">26</option>
+                    <option value="32" selected>32</option>
+                    <option value="38">38</option>
+                </select>
+                <button id="text-font-style" value="0" onclick="onClickTextStyle()">B</button>
+                <input class="text-font-color" id="text-font-color" type="color" list="" onchange="changeFontColor()">
+                <!-- <datalist id="list">
+                    <option>#ff0000</option>
+                    <option>#ee0000</option>
+                    <option>#dd0000</option>
+                    <option>#cc0000</option>
+                    <option>#bb0000</option>
+                </datalist> -->
             </div>
             <div class="write-category-draw">
                 <button>마우스커서</button>
@@ -37,6 +50,35 @@
             </div>
         </div>
         <hr>
-        <textarea class="write-textarea" placeholder="내용을 입력하세요." onfocus="this.placeholder=''" onblur="this.placeholder='내용을 입력하세요'"></textarea>
+        <textarea class="write-textarea" id="textarea" placeholder="내용을 입력하세요." 
+        onfocus="this.placeholder=''" onblur="this.placeholder='내용을 입력하세요'"></textarea>
+
+        <script>
+            let textArea = document.getElementById("textarea");
+
+            function changeFontSize(){
+                let fontSize = document.getElementById("font-size").value;
+                textArea.style.fontSize = fontSize+"px";
+            }
+
+            function onClickTextStyle(){
+                let textStyle = document.getElementById("text-font-style");
+                if(textStyle.value == 0){
+                    textStyle.value = 1;
+                    textStyle.style.color = 'blue';
+                    textArea.style.fontWeight = 'bold';
+                }
+                else if(textStyle.value == 1){
+                    textStyle.value = 0;
+                    textStyle.style.color = 'black';
+                    textArea.style.fontWeight = 'normal';
+                }
+            }
+
+            function changeFontColor(){
+                let fontColorValue = document.getElementById("text-font-color").value;
+                textArea.style.color = fontColorValue;
+            }
+        </script>
     </body>
 </html>

@@ -13,8 +13,7 @@ body{
     float: right;
 }
 
-
-
+/* 제목 */
 .write-title-space{
     margin-bottom: 20px;
 }
@@ -33,25 +32,55 @@ body{
     font-weight: 550;
     font-style: normal;
 }
+
+/* 쓰기 속성 카테고리 틀 */
 .write-category{
     display:flex;
+}
+.write-category-text{
+    border-right: 1px solid gray;
+}
+.write-category-draw{
+    border-right: 1px solid gray;
+    padding-right: 20px;
 }
 .write-category div{
     margin-right: 20px;
 }
+
+/* font style */
+.text-font-size{
+    width: 43px;
+    height: 25px;
+}
+#text-font-style{
+    font-size: 20px;
+    font-weight: bold;
+    background-color: white;
+    border : 0;
+    outline: 0;
+}
+.text-font-color{
+    width: 53px;
+    -webkit-appearance: none;
+    margin: 0;
+    background-color: white;
+    border: 0;
+    outline: 0;
+}
+
+/* textarea style */
 .write-textarea{
     width: 100%;
     height: 450px;
-    font-size: 30px;
+    font-size: 32px;
     color: black;
-    font-weight: 550;
-    font-style: normal; 
+    font-weight: normal;
     border: 0 solid black;
     outline: none;
 }
 .write-textarea::placeholder{
     color: black;
-    font-weight: 550;
-    font-style: normal;
+    font-weight: bold;
     
 }
