@@ -3,9 +3,8 @@
     <head>
         <title>작성</title>
         <link href="write.css" rel="stylesheet" type="text/css" />
-    
     </head>
-    <body>
+    <body onload="init()">
         <header class="write-header">
             <div class="header-prev">
                 <button class="header-button" id="prev">이전</button>
@@ -21,7 +20,14 @@
         <br>
 
         <div class="write-category">
+            <!-- 텍스트 속성 -->
             <div class="write-category-text">
+                <select class="text-font-family" name="font-family" id="font-family" onchange="changeFontFamily()">
+                    <option value="26">26</option>
+                    <option value="32" selected>32</option>
+                    <option value="38">38</option>
+                </select>
+
                 <select class="text-font-size" name="font-size" id="font-size" onchange="changeFontSize()">
                     <option value="26">26</option>
                     <option value="32" selected>32</option>
@@ -29,56 +35,41 @@
                 </select>
                 <button id="text-font-style" value="0" onclick="onClickTextStyle()">B</button>
                 <input class="text-font-color" id="text-font-color" type="color" list="" onchange="changeFontColor()">
-                <!-- <datalist id="list">
-                    <option>#ff0000</option>
-                    <option>#ee0000</option>
-                    <option>#dd0000</option>
-                    <option>#cc0000</option>
-                    <option>#bb0000</option>
-                </datalist> -->
             </div>
+            
+            <!-- 그리기 속성 -->
             <div class="write-category-draw">
-                <button>마우스커서</button>
-                <button>굵기</button>
-                <button>색</button>
-                <button>도형</button>
-                <button>지우개</button>
-                <button>전체 지우기</button>
+                <button id="canvas-pen" value="0" onclick="onClickCanvasPen()">펜</button>
+                <button id="eraser" value="0" onclick="onClickCanvasEraser()">지우개</button>
+                <span style="font-size: 20px; font-weight: bold;">굵기</span>
+                <input id="canvas-thickness" type="range" list="temperatures" min="2" max="50" step="2" value="2">
+                <datalist id="temperatures">
+                    <option value="2" label="low" selected></option>
+                    <option value="24" label="medium"></option>
+                    <option value="50" label="high"></option>
+                </datalist>
+                <input id="canvas-color" type="color" list="" onchange="changeConvasPenColor()">
+                <span style="font-size: 20px; font-weight: bold;">도형</span>
+                <button class="shape" id="square-button" name="square" value="0"><image src="./icon/square.png" name="square" width="20"></image></button>
+                <button class="shape" id="triangle-button" name="triangle" value="0"><image src="./icon/triangle.png" name="triangle" width="20"></image></button>
+                <button class="shape" id="circle-button" name="circle" value="0"><image src="./icon/circle.png" name="circle" width="20"></image></button>
+                <button class="shape" id="eraser-all" onclick="onClickCanvasEraserAll()">전체 지우기</button>
             </div>
+
+            <!-- 이미지 삽입 -->
             <div class="write-category-imageInsert">
                 <button>이미지 삽입</button>
             </div>
         </div>
         <hr>
-        <textarea class="write-textarea" id="textarea" placeholder="내용을 입력하세요." 
+        <div class="textarea-div" id="textarea-div">
+            <textarea class="write-textarea" id="textarea" placeholder="내용을 입력하세요." 
         onfocus="this.placeholder=''" onblur="this.placeholder='내용을 입력하세요'"></textarea>
+        </div>
+        <div class="canvas-div" id="canvas-div">
+            <canvas class="canvas" id="canvas"></canvas>
+        </div>
 
-        <script>
-            let textArea = document.getElementById("textarea");
-
-            function changeFontSize(){
-                let fontSize = document.getElementById("font-size").value;
-                textArea.style.fontSize = fontSize+"px";
-            }
-
-            function onClickTextStyle(){
-                let textStyle = document.getElementById("text-font-style");
-                if(textStyle.value == 0){
-                    textStyle.value = 1;
-                    textStyle.style.color = 'blue';
-                    textArea.style.fontWeight = 'bold';
-                }
-                else if(textStyle.value == 1){
-                    textStyle.value = 0;
-                    textStyle.style.color = 'black';
-                    textArea.style.fontWeight = 'normal';
-                }
-            }
-
-            function changeFontColor(){
-                let fontColorValue = document.getElementById("text-font-color").value;
-                textArea.style.color = fontColorValue;
-            }
-        </script>
+        <script src="write.js"></script>
     </body>
 </html>
