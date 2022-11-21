@@ -1,0 +1,55 @@
+body{
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 2%;
+}
+
+.index-header{
+    padding-left: 20px;
+    height: 50px;
+}
+
+header span{
+    font-weight: bold;
+    font-size: 30px;
+    display: inline-block;
+}
+
+.header-button{
+    width: 100px;
+    height: 30px;
+    border: 0; 
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 14px;
+    float: right;
+}
+
+.header-button a{
+    text-decoration: none;
+    color: black;
+}
+nav {
+    border-bottom: 1px solid gray;
+    padding-left: 20px;
+}
+
+section {
+    min-height: 100%;
+    padding-bottom: 50px;
+    padding-left: 20px;
+    position: relative;
+}
+footer {
+    height: 50px;
+    width: 80%;
+    position: absolute;
+    bottom: 0;
+    border-top: 1px solid gray;
+    padding-left: 50px;
+}
+footer span{
+    margin-right: 30px;
+    position: relative;
+    top: 30%;
+}
