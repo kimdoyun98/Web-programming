@@ -1,4 +1,13 @@
+function goBack(){
+    window.history.back();
+}
+
 let textArea = document.getElementById("textarea");
+
+function changeFontFamily() {
+    let fontfamily = document.getElementById("font-family").value;
+    textArea.style.fontFamily = fontfamily;
+  }
 
 function changeFontSize(){
     let fontSize = document.getElementById("font-size").value;
@@ -24,186 +33,178 @@ function changeFontColor(){
     textArea.style.color = fontColorValue;
 }
 
+
+
+
+
+
+
 // CANVAS
-let canvasPen = document.getElementById("canvas-pen");
-let canvas, context;
-let textarea_div = document.getElementById("textarea-div");
-let canvas_div = document.getElementById("canvas-div");
-const canvasThickness = document.getElementById("canvas-thickness");
-const canvasEraser = document.getElementById("eraser");
-const canvasEraserAll = document.getElementById("eraser-all");
+const canvas = document.querySelector("canvas"),
+    toolBtns = document.querySelectorAll(".tool"),
+    fillcolor = document.querySelector("#fill-color"),
+    sizeSlider = document.querySelector("#canvas-size-slider"),
+    canvasColor = document.getElementById("canvas-color"),
+    canvasEraser = document.getElementById("eraser"),
+    canvasEraserAll = document.getElementById("eraser-all"),
+    context = canvas.getContext("2d"),
+    textArea_div = document.getElementById("textarea-div"),
+    drawingBoard = document.getElementById("drawing-board");
 
-function init(){
-    canvas = document.getElementById("canvas");
-    context = canvas.getContext("2d");
+const saveImg = document.querySelector("#save");
 
-    context.lineWidth = 2;
-    context.strokeStyle = 'black';
+let prevMouseX,
+    prevMouseY,
+    snapshot,
+    isDrawing = false,
+    selectedTool = "text",
+    brushWidth = 5,
+    selectedColor = "#000"; // black
 
-    // const { width, height } = canvas.getBoundingClientRect();
-    canvas.width = 1228;
-    canvas.height = 500;
-}
 
-function onClickCanvasPen(){
-    if(canvasPen.value == 0){
-        canvasPen.value = 1;
-        canvasEraser.value = 0;
-        canvasPen.style.color = 'blue';
-        canvasEraser.style.color = 'black';
+// 툴 버튼 클릭 이벤트
+toolBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelector(".options .active").classList.remove("active");
+      btn.classList.add("active");
+      selectedTool = btn.id;
+      console.log(selectedTool);
+
+      if (selectedTool != "text") {
         textArea.disabled = true;
-        textarea_div.style.zIndex = 1;
-        canvas_div.style.zIndex = 2;
+        textArea_div.style.zIndex = 1;
+        drawingBoard.style.zIndex = 2;
 
-        SHAPE_BUTTON.forEach( shape => {
-            shape.value = 0;
-            shape.style.boxShadow = "";
-        });
+        canvas.addEventListener("mousedown", startDraw);
+        canvas.addEventListener("mousemove", drawing);
+        canvas.addEventListener("mouseup", () => (isDrawing = false));
 
-        if(canvas){
-            canvas.addEventListener("mousedown", down, false);
-            canvas.addEventListener("mouseup", up, false);
-            canvas.addEventListener("mousemove", move, false);
-            canvas.addEventListener("mouseout", out, false);
-        }
-    }
-    else if(canvasPen.value == 1){
-        canvasPen.value = 0;
-        canvasPen.style.color = 'black';
+      }
+      else {
         textArea.disabled = false;
-        textarea_div.style.zIndex = 2;
-        canvas_div.style.zIndex = 1;
+        textArea_div.style.zIndex = 2;
+        drawingBoard.style.zIndex = 1;
 
-        if(canvas){
-            canvas.removeEventListener("mousedown", down, false);
-            canvas.removeEventListener("mouseup", up, false);
-            canvas.removeEventListener("mousemove", move, false);
-            canvas.removeEventListener("mouseout", out, false);
-        }
+        canvas.removeEventListener("mousedown", startDraw);
+        canvas.removeEventListener("mousemove", drawing);
+        canvas.removeEventListener("mouseup", () => (isDrawing = false));
+
     }
-}
-
-function onClickCanvasEraser(){
-    canvasEraser.value = 1;
-    canvasPen.value = 0;
-    canvasEraser.style.color = 'blue';
-    canvasPen.style.color = 'black';
-
-    SHAPE_BUTTON.forEach( shape => {
-        shape.value = 0;
-        shape.style.boxShadow = "";
     });
-}
+});
 
+  
+window.addEventListener("load", () => {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+});
+
+// Canvas 색 변경
 function changeConvasPenColor(){
-    let canvasColor = document.getElementById("canvas-color");
-    context.strokeStyle = canvasColor.value;
+    selectedColor = canvasColor.value;
 }
 
+// 전체 지우기
 function onClickCanvasEraserAll(){
     context.clearRect(0, 0, canvas.width, canvas.height);
+    // textArea_div.style.paddingTop = 0;
+    // drawingBoard.style.height = 65+"%";
 }
 
+// 굵기 이벤트
+sizeSlider.addEventListener("change", () => (brushWidth = sizeSlider.value));
 
-let startX = 0, startY = 0;
-let dragging = false;
 
-function move(e){
-    if(!dragging) return;
-
-    var curX = e.offsetX;
-    var curY = e.offsetY;
-
-    if (canvasPen.value == 1) {
-        draw(curX, curY);
+// 사각형
+const drawRect = (e) => {
+    if (!fillcolor.checked) {
+      return context.strokeRect(
+        e.offsetX,
+        e.offsetY,
+        prevMouseX - e.offsetX,
+        prevMouseY - e.offsetY
+      );
     }
-    if(canvasEraser.value == 1) {
-        if(dragging){
-            context.clearRect(curX-context.lineWidth/2, curY-context.lineWidth/2, context.lineWidth, context.lineWidth);
-        }
-    }
-    if(circle.value == 1){
-
-    }
-    else if(triangle.value == 1){
-
-    }
-    else if(square.value == 1){
-        //canvasDraw();
-    }
-    startX = curX;
-    startY = curY;
-
-    // stX = curX;
-    // stY = curY;
-}
-
-function down(e){
-    startX = e.offsetX;
-    startY = e.offsetY;
-    // stX = e. offsetX ; 
-    // stY = e. offsetY ; 
-    dragging = true;
-}
-function up(e) {
-    // endX = e.offsetX
-    // endY = e.offsetY
-    dragging = false;
-}
-
-function out(e) { dragging = false; }
-
-function draw(curX, curY){
+    context.fillRect(
+      e.offsetX,
+      e.offsetY,
+      prevMouseX - e.offsetX,
+      prevMouseY - e.offsetY
+    );
+  };
+  
+  //원
+  const drawCircle = (e) => {
+    context.beginPath();
+    let radius = Math.sqrt(
+      Math.pow(prevMouseX - e.offsetX, 2) + Math.pow(prevMouseY - e.offsetY, 2)
+    );
+    context.arc(prevMouseX, prevMouseY, radius, 0, 2 * Math.PI);
+    fillcolor.checked ? context.fill() : context.stroke();
+  };
+  
+  //삼각형
+  const drawTriangle = (e) => {
+    context.beginPath();
+    context.moveTo(prevMouseX, prevMouseY);
+    context.lineTo(e.offsetX, e.offsetY);
+    context.lineTo(prevMouseX * 2 - e.offsetX, e.offsetY);
+    context.closePath();
+    fillcolor.checked ? context.fill() : context.stroke();
+  };
+  
+  // 마우스 이벤트
+  const startDraw = (e) => {
+    isDrawing = true;
+    prevMouseX = e.offsetX;
+    prevMouseY = e.offsetY;
+    context.beginPath();
+    context.lineWidth = brushWidth;
+    context.strokeStyle = selectedColor;
+    context.fillStyle = selectedColor;
+    snapshot = context.getImageData(0, 0, canvas.width, canvas.height);
+  };
+  
+  const drawing = (e) => {
     context.lineJoin = "round";
     context.lineCap = "round";
-    context.beginPath();
-    context.moveTo(startX, startY);
-    context.lineTo(curX, curY);
-    context.stroke();
-}
 
-function handleRangeChange(event) {
-    const size = event.target.value;
-    context.lineWidth = size;
-    canvasThickness.value = size;
-}
-canvasThickness.addEventListener("input", handleRangeChange);
-
-// SHAPE
-let circle = document.getElementById("circle-button");
-let triangle = document.getElementById("triangle-button");
-let square = document.getElementById("square-button");
-let SHAPE_BUTTON = [square, triangle, circle];
-
-function onClickShape(event){
-    let shape = event.target;
-
-    for(i = 0 ; i < SHAPE_BUTTON.length ; i++){
-        let button = SHAPE_BUTTON[i];
-        if(button.name == shape.name){
-            if(button.value == 0){
-                button.value = 1;
-                button.style.boxShadow = "1px 1px 3px 1px #dadce0";
-                canvasEraser.value = 0;
-                canvasPen.value = 0;
-                canvasEraser.style.color = 'black';
-                canvasPen.style.color = 'black';
-                
-            }
-            else if(button.value == 1){
-                button.value = 0;
-                button.style.boxShadow = "";
-            }
-        }
-        else {
-            button.style.boxShadow = "";
-        }
+    if (!isDrawing) return;
+    context.putImageData(snapshot, 0, 0);
+  
+    if (selectedTool == "brush" || selectedTool === "eraser") {
+        context.strokeStyle = selectedTool === "eraser" ? "#fff" : selectedColor;
+        context.lineTo(e.offsetX, e.offsetY); // 마우스 포인터따라 그리기
+        context.stroke(); // 그리기 선 색
+    } else if (selectedTool === "rectangle") {
+      drawRect(e);
+    } else if (selectedTool === "circle") {
+      drawCircle(e);
+    } else {
+      drawTriangle(e);
     }
-}
-SHAPE_BUTTON.forEach( shape => shape.addEventListener("click", onClickShape));
+  };
 
-// function canvasDraw()
-// {
-//     context.clearRect(0, 0, context.canvas.width, context.canvas.height) //설정된 영역만큼 캔버스에서 지움
-//     context.strokeRect(startX,startY,currentX-startX,currentY-startY) //시작점과 끝점의 좌표 정보로 사각형을 그려준다.
-// }
+
+// 캔버스 이미지 저장
+saveImg.addEventListener("click", () => {
+    const link = document.createElement("a");
+    link.download = Date.now + ".jpg"; // 파일명
+    link.href = canvas.toDataURL();
+    link.click();
+});
+
+// 이미지 불러오기
+function loadFile(input) {
+    var file = input.files[0];	//선택된 파일 가져오기
+
+    let img = new Image();
+    img.src = URL.createObjectURL(file);  
+
+    img.onload = function (){
+        context.drawImage(img, 200, 10, canvas.width - 400, 150);
+    }
+
+    // textArea_div.style.paddingTop = 300 +"px";
+    // drawingBoard.style.height = 105+"%";
+};

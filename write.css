@@ -13,6 +13,16 @@ body{
     float: right;
 }
 
+/* header */
+.header-button{
+    width: 100px;
+    height: 30px;
+    border: 0; 
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
 /* 제목 */
 .write-title-space{
     margin-bottom: 20px;
@@ -33,32 +43,55 @@ body{
     font-style: normal;
 }
 
-/* 쓰기 속성 카테고리 틀 */
-.write-category{
-    display:flex;
+/* 
+    Tool 
+*/
+ul {
+    list-style: none;
+    padding-left: 0px ;
 }
-.write-category-text{
-    border-right: 1px solid gray;
-}
-.write-category-draw{
-    border-right: 1px solid gray;
-    padding-right: 20px;
-}
-.write-category div{
-    margin-right: 20px;
+li{
+    float: left;
+    margin-right: 15px;
+    cursor: pointer;
 }
 
-/* font style */
-.text-font-size{
-    width: 43px;
-    height: 25px;
+input, button, li label{
+    cursor: pointer;
 }
-.write-category button {
+
+.tool-column{
+    border-right: 1px solid gray;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+.option:is(:hover, .active) img { 
+    filter: invert(17%) sepia(90%) saturate(3000%) hue-rotate(900deg)
+      brightness(100%) contrast(100%);
+}
+
+.option:is(:hover, .active) :where(span, label) {
+    color: #4a98f7;
+}
+
+.tools span{
     font-size: 20px;
     font-weight: bold;
-    background-color: white;
-    border : 0;
-    outline: 0;
+}
+
+.tools{
+    display:flex;
+}
+
+.tools div{
+    margin-right: 10px;
+}
+
+
+/* font tool */
+select {
+    width: 50px;
+    height: 25px;
 }
 .text-font-color{
     width: 53px;
@@ -68,18 +101,37 @@ body{
     border: 0;
     outline: 0;
 }
+#text-font-style {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: white;
+    border : 0;
+    outline: 0;
+}
 
-/* textarea style */
+#eraser-all {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: white;
+    border-radius: 10px;
+    border-color:gray;
+}
+
+
+/* 
+    textarea style 
+*/
 .textarea-div{
     position : absolute;
+    /* padding-top: 330px; */
     width: 80%;
-    height: 500;
+    height: 65%; 
     z-index: 2;
 }
 .write-textarea{
     background-color: transparent;
     width: 100%;
-    height: 500px;
+    height: 100%;
     font-size: 32px;
     color: black;
     font-weight: normal;
@@ -87,19 +139,27 @@ body{
     outline: none;
     resize:none;
 }
+
 .write-textarea::placeholder{
     color: black;
     font-weight: bold;
-    
 }
 
 /* canvas */
-.canvas-div{
+.drawing-board{
+    /* flex: 1; */
     position : absolute;
     width: 80%;
+    height: 65%; /*111%*/
     z-index: 1;
-    top: 210px;
+    top: 225px; /*210*/
 }
+
+.canvas{
+    width: 100%;
+    height: 100%;
+}
+
 #canvas-color{
     width: 53px;
     -webkit-appearance: none;
@@ -109,4 +169,14 @@ body{
     outline: 0;
 }
 
-/* shape */
+.input-image {
+    padding: 2px 2px;
+    background-color:gray;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+
+.tools div{
+    margin: auto;
+}

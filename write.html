@@ -4,13 +4,12 @@
         <title>작성</title>
         <link href="write.css" rel="stylesheet" type="text/css" />
     </head>
-    <body onload="init()">
+    <body>
         <header class="write-header">
             <div class="header-prev">
-                <button class="header-button" id="prev">이전</button>
+                <button class="header-button" id="prev" onclick="goBack()">&lt 이전</button>
             </div>
             <div class="header-save">
-                <button class="header-button" id="temp-save">임시저장</button>
                 <button class="header-button" id="save">저장</button>
             </div>
         </header>
@@ -19,54 +18,106 @@
         </div>
         <br>
 
-        <div class="write-category">
-            <!-- 텍스트 속성 -->
-            <div class="write-category-text">
-                <select class="text-font-family" name="font-family" id="font-family" onchange="changeFontFamily()">
-                    <option value="26">26</option>
-                    <option value="32" selected>32</option>
-                    <option value="38">38</option>
-                </select>
 
-                <select class="text-font-size" name="font-size" id="font-size" onchange="changeFontSize()">
-                    <option value="26">26</option>
-                    <option value="32" selected>32</option>
-                    <option value="38">38</option>
-                </select>
-                <button id="text-font-style" value="0" onclick="onClickTextStyle()">B</button>
-                <input class="text-font-color" id="text-font-color" type="color" list="" onchange="changeFontColor()">
+
+        <div class="tools">
+            <!-- TEXT TOOL -->
+            <div class="tool-column">
+                <ul class = options>
+                    <li class="option active tool" id="text">
+                        <span>T</span>
+                    </li>
+                    <li>
+                        <select class="text-font-family" name="font-family" id="font-family" onchange="changeFontFamily()">
+                            <option value="Arial, Helvetica, sans-serif" selected>Arial</option>
+                            <!--Arial, Georgia, Impact 폰트 적용-->
+                            <option value="Georgia, Times New Roman, Times, serif">
+                                Georgia
+                            </option>
+                            <option value="Impact, Haettenschweiler, Arial Narrow Bold, sans-serif">
+                                Impact
+                            </option>
+                        </select>
+                    </li>
+                    <li>
+                        <select class="text-font-size" name="font-size" id="font-size" onchange="changeFontSize()">
+                            <option value="26">26</option>
+                            <option value="32" selected>32</option>
+                            <option value="38">38</option>
+                        </select>
+                    </li>
+                    <li>
+                        <button id="text-font-style" value="0" onclick="onClickTextStyle()">B</button>
+                    </li>
+                    <li>
+                        <input class="text-font-color" id="text-font-color" type="color" list="" onchange="changeFontColor()">
+                    </li>
+                </ul>
             </div>
             
-            <!-- 그리기 속성 -->
-            <div class="write-category-draw">
-                <button id="canvas-pen" value="0" onclick="onClickCanvasPen()">펜</button>
-                <button id="eraser" value="0" onclick="onClickCanvasEraser()">지우개</button>
-                <span style="font-size: 20px; font-weight: bold;">굵기</span>
-                <input id="canvas-thickness" type="range" list="temperatures" min="2" max="50" step="2" value="2">
-                <datalist id="temperatures">
-                    <option value="2" label="low" selected></option>
-                    <option value="24" label="medium"></option>
-                    <option value="50" label="high"></option>
-                </datalist>
-                <input id="canvas-color" type="color" list="" onchange="changeConvasPenColor()">
-                <span style="font-size: 20px; font-weight: bold;">도형</span>
-                <button class="shape" id="square-button" name="square" value="0"><image src="./icon/square.png" name="square" width="20"></image></button>
-                <button class="shape" id="triangle-button" name="triangle" value="0"><image src="./icon/triangle.png" name="triangle" width="20"></image></button>
-                <button class="shape" id="circle-button" name="circle" value="0"><image src="./icon/circle.png" name="circle" width="20"></image></button>
-                <button class="shape" id="eraser-all" onclick="onClickCanvasEraserAll()">전체 지우기</button>
+            <!-- CANVAS TOOL -->
+            <!-- DRAW TOOL -->
+            <div class="tool-column">
+                <ul class="options">
+                    <li class="option tool" id="brush">
+                        <span>펜</span>
+                    </li>
+                    <li class="option tool" id="eraser">
+                        <span>지우개</span>
+                    </li>
+                    <li>
+                        <input id="canvas-size-slider" type="range" list="temperatures" min="2" max="50" step="2" value="2">
+                    </li>
+                    <li>
+                        <input id="canvas-color" type="color" list="" onchange="changeConvasPenColor()">
+                    </li>
+                    <li>
+                        <button class="shape" id="eraser-all" onclick="onClickCanvasEraserAll()">전체 지우기</button>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- 도형 TOOL -->
+            <div class="tool-column">
+                <ul class="options">
+                    <li class="option tool" id="rectangle">
+                        <img src="icon/rectangle.png" alt="" width="20"/>
+                    </li>
+                    <li class="option tool" id="circle">
+                        <img src="icon/circle.png" alt="" width="20"/>
+                    </li>
+                    <li class="option tool" id="triangle">
+                        <img src="icon/triangle.png" alt="" width="20"/>
+                    </li>
+                    <li class="option">
+                        <label for="fill-color" style="font-size: 20px; font-weight: bold;">채우기</label>
+                        <input type="checkbox" id="fill-color" style="zoom: 1.5;">
+                    </li>
+                </ul>
             </div>
 
             <!-- 이미지 삽입 -->
-            <div class="write-category-imageInsert">
-                <button>이미지 삽입</button>
+            <div class="imageInsert">
+                <label class="input-image" for="chooseFile">이미지 추가</label>
+                <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)" style="display: none;">
             </div>
         </div>
         <hr>
+
+
+
+        <div class="image-show" id="image-show"></div>
+
+
+
+
+
         <div class="textarea-div" id="textarea-div">
             <textarea class="write-textarea" id="textarea" placeholder="내용을 입력하세요." 
         onfocus="this.placeholder=''" onblur="this.placeholder='내용을 입력하세요'"></textarea>
         </div>
-        <div class="canvas-div" id="canvas-div">
+
+        <div class="drawing-board" id="drawing-board">
             <canvas class="canvas" id="canvas"></canvas>
         </div>
 
