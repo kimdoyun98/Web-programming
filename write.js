@@ -107,8 +107,11 @@ function changeConvasPenColor(){
 // 전체 지우기
 function onClickCanvasEraserAll(){
     context.clearRect(0, 0, canvas.width, canvas.height);
-    // textArea_div.style.paddingTop = 0;
-    // drawingBoard.style.height = 65+"%";
+    textArea_div.style.paddingTop = 0;
+    drawingBoard.style.height = 65+"%";
+
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
 }
 
 // 굵기 이벤트
@@ -202,9 +205,12 @@ function loadFile(input) {
     img.src = URL.createObjectURL(file);  
 
     img.onload = function (){
-        context.drawImage(img, 200, 10, canvas.width - 400, 150);
+        context.drawImage(img, 200, 10, canvas.width - 400, 280);
     }
 
-    // textArea_div.style.paddingTop = 300 +"px";
-    // drawingBoard.style.height = 105+"%";
+    textArea_div.style.paddingTop = 300 +"px";
+    drawingBoard.style.height = 105+"%";
+
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
 };
