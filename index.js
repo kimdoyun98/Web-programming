@@ -35,7 +35,9 @@ for(let i = 0; i < objectList.length; i++){
     let span = document.createElement('span');
     let p_tag = document.createElement('p');
     let span_title = document.createTextNode(objectList[i].title);
-    let p_content = document.createTextNode(objectList[i].content);
+    
+    let text = objectList[i].content.split('<br>');
+    let p_content = document.createTextNode(text[0]);
 
     span.appendChild(span_title);
     p_tag.appendChild(p_content);

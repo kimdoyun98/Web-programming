@@ -166,7 +166,6 @@ const drawRect = (e) => {
     context.lineWidth = brushWidth;
     context.strokeStyle = selectedColor;
     context.fillStyle = selectedColor;
-    snapshot = context.getImageData(0, 0, canvas.width, canvas.height);
   };
   
   const drawing = (e) => {
@@ -174,7 +173,6 @@ const drawRect = (e) => {
     context.lineCap = "round";
 
     if (!isDrawing) return;
-    context.putImageData(snapshot, 0, 0);
   
     if (selectedTool == "brush" || selectedTool === "eraser") {
         context.strokeStyle = selectedTool === "eraser" ? "#fff" : selectedColor;
@@ -214,16 +212,17 @@ saveImg.addEventListener("click", () => {
       textStyle = document.getElementById("text-font-style")
       fontColorValue = document.getElementById("text-font-color").value;
 
+  let text = textArea.value;
+      text = text.replaceAll(/(\n|\r\n)/g, "<br>");
+
   let saveObject = new Object();
   saveObject.title = textTitle.value;
-  saveObject.content = textArea.value;
+  saveObject.content = text;
   saveObject.content_fontFamily = fontfamily;
   saveObject.content_fontSize = fontSize + "px";
   saveObject.content_fontWeight = textStyle.value == 0 ? "normal" : "bold";
   saveObject.content_fontColor = fontColorValue; 
   saveObject.canvasUrl = canvas.toDataURL();
-  
-  console.log(saveObject);
 
   localStorage.setItem('saveObject', JSON.stringify(saveObject));
   localStorage.setItem('page', '1');
