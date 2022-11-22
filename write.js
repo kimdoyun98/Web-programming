@@ -226,6 +226,5 @@ saveImg.addEventListener("click", () => {
 
   localStorage.setItem('saveObject', JSON.stringify(saveObject));
   localStorage.setItem('page', '1');
-  //window.history.back();
   location.href='index.html';
 });

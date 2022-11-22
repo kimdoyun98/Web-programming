@@ -29,4 +29,9 @@ for(let i = 0; i < text.length; i++){
 }
 
 // 이미지
-canvasImg.src = readData.canvasUrl;
+var newImage = document.createElement("img");
+newImage.id = 'canvasImg';
+newImage.src = readData.canvasUrl;
+
+var container = document.getElementById('canvasImg');
+container.appendChild(newImage);

@@ -3,8 +3,6 @@ let saveObject = JSON.parse(localStorage.getItem('saveObject'));
 let saveObjectList = JSON.parse(localStorage.getItem('saveObjectList'));
 let objectList = [];
 
-console.log("pageload : " + pageload);
-
 if (saveObjectList == null && saveObject != null){ // 첫 추가
     objectList.push(saveObject);
     localStorage.setItem('saveObjectList', JSON.stringify(objectList));
