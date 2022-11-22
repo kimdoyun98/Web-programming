@@ -1,7 +1,7 @@
 const readData = JSON.parse(localStorage.getItem('readObject')),
       title_span = document.querySelector('.read-header span'),
-      content_div = document.getElementById('test'),
-      content_p = document.getElementById('content');
+      content_p = document.getElementById('content'),
+      canvasImg = document.getElementById('canvasImg');
 
 function goBack(){
     window.history.back();
@@ -27,3 +27,6 @@ for(let i = 0; i < text.length; i++){
     content_p.appendChild(content);
     content_p.appendChild(br);
 }
+
+// 이미지
+canvasImg.src = readData.canvasUrl;
