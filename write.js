@@ -2,7 +2,8 @@ function goBack(){
     window.history.back();
 }
 
-let textArea = document.getElementById("textarea");
+const textArea = document.getElementById("textarea"),
+      textTitle = document.getElementById("title");
 
 function changeFontFamily() {
     let fontfamily = document.getElementById("font-family").value;
@@ -188,15 +189,6 @@ const drawRect = (e) => {
     }
   };
 
-
-// 캔버스 이미지 저장
-saveImg.addEventListener("click", () => {
-    const link = document.createElement("a");
-    link.download = Date.now + ".jpg"; // 파일명
-    link.href = canvas.toDataURL();
-    link.click();
-});
-
 // 이미지 불러오기
 function loadFile(input) {
     var file = input.files[0];	//선택된 파일 가져오기
@@ -214,3 +206,26 @@ function loadFile(input) {
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
 };
+
+// 저장
+saveImg.addEventListener("click", () => {
+  let fontfamily = document.getElementById("font-family").value,
+      fontSize = document.getElementById("font-size").value
+      textStyle = document.getElementById("text-font-style")
+      fontColorValue = document.getElementById("text-font-color").value;
+
+  let saveObject = new Object();
+  saveObject.title = textTitle.value;
+  saveObject.content = textArea.value;
+  saveObject.content_fontFamily = fontfamily;
+  saveObject.content_fontSize = fontSize + "px";
+  saveObject.content_fontWeight = textStyle.value == 0 ? "normal" : "bold";
+  saveObject.content_fontColor = fontColorValue; 
+  saveObject.canvasUrl = canvas.toDataURL();
+  
+  console.log(saveObject);
+
+  localStorage.setItem('saveObject', JSON.stringify(saveObject));
+  localStorage.setItem('page', '1');
+  window.history.back();
+});

@@ -1,13 +1,17 @@
 body{
     padding-left: 10%;
     padding-right: 10%;
-    padding-top: 2%;
+}
+header {
+    position: fixed;
+    top: 0;
+    width: 80%;
+    padding-top: 3%;
+    padding-left: 20px;
+    background: white;
+    
 }
 
-.index-header{
-    padding-left: 20px;
-    height: 50px;
-}
 
 header span{
     font-weight: bold;
@@ -29,27 +33,38 @@ header span{
     text-decoration: none;
     color: black;
 }
-nav {
+h2 {
     border-bottom: 1px solid gray;
     padding-left: 20px;
+    padding-top: 50px;
+    padding-bottom: 30px;
 }
 
 section {
-    min-height: 100%;
+    height: 100%;
     padding-bottom: 50px;
+    padding-left: 40px;
+    margin-top: 23%;
+}
+
+section div{
+    padding-top: 20px;
     padding-left: 20px;
-    position: relative;
+    cursor: pointer;
 }
-footer {
-    height: 50px;
-    width: 80%;
-    position: absolute;
-    bottom: 0;
-    border-top: 1px solid gray;
-    padding-left: 50px;
+
+section div span {
+    font-size: 20px;
+    font-weight: bold;
 }
-footer span{
-    margin-right: 30px;
-    position: relative;
-    top: 30%;
+
+section div p {
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.saveContent {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.2) ;
 }
