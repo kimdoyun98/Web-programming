@@ -3,6 +3,8 @@ let saveObject = JSON.parse(localStorage.getItem('saveObject'));
 let saveObjectList = JSON.parse(localStorage.getItem('saveObjectList'));
 let objectList = [];
 
+console.log("pageload : " + pageload);
+
 if (saveObjectList == null && saveObject != null){ // 첫 추가
     objectList.push(saveObject);
     localStorage.setItem('saveObjectList', JSON.stringify(objectList));
@@ -59,14 +61,3 @@ listBtn.forEach((btn) => {
         location.href='read.html';
     });
 });
-
-// var newImage = document.createElement("img");
-//     newImage.setAttribute("class", 'img');
-//     newImage.src = objectList[0].canvasUrl;
-
-//     // newImage.style.width = 100;
-//     // newImage.style.height = 100;
-//     // newImage.style.objectFit = "contain";
-
-// var container = document.getElementById('image-show');
-// container.appendChild(newImage);
