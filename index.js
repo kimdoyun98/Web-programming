@@ -1,4 +1,7 @@
-location.reload();
+window.onload = function(){
+    location.reload();
+}
+
 let pageload = localStorage.getItem('page');
 let saveObject = JSON.parse(localStorage.getItem('saveObject'));
 let saveObjectList = JSON.parse(localStorage.getItem('saveObjectList'));
