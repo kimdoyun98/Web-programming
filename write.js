@@ -34,12 +34,6 @@ function changeFontColor(){
     textArea.style.color = fontColorValue;
 }
 
-
-
-
-
-
-
 // CANVAS
 const canvas = document.querySelector("canvas"),
     toolBtns = document.querySelectorAll(".tool"),
@@ -60,7 +54,8 @@ let prevMouseX,
     isDrawing = false,
     selectedTool = "text",
     brushWidth = 5,
-    selectedColor = "#000"; // black
+    selectedColor = "#000",// black
+    uploadImg = false; 
 
 
 // 툴 버튼 클릭 이벤트
@@ -110,6 +105,7 @@ function onClickCanvasEraserAll(){
     context.clearRect(0, 0, canvas.width, canvas.height);
     textArea_div.style.paddingTop = 0;
     drawingBoard.style.height = 65+"%";
+    uploadImg = false; 
 
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
@@ -166,6 +162,8 @@ const drawRect = (e) => {
     context.lineWidth = brushWidth;
     context.strokeStyle = selectedColor;
     context.fillStyle = selectedColor;
+
+    snapshot = context.getImageData(0, 0, canvas.width, canvas.height);
   };
   
   const drawing = (e) => {
@@ -173,6 +171,7 @@ const drawRect = (e) => {
     context.lineCap = "round";
 
     if (!isDrawing) return;
+    context.putImageData(snapshot, 0, 0);
   
     if (selectedTool == "brush" || selectedTool === "eraser") {
         context.strokeStyle = selectedTool === "eraser" ? "#fff" : selectedColor;
@@ -200,6 +199,7 @@ function loadFile(input) {
 
     textArea_div.style.paddingTop = 300 +"px";
     drawingBoard.style.height = 105+"%";
+    uploadImg = true; 
 
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
@@ -223,6 +223,7 @@ saveImg.addEventListener("click", () => {
   saveObject.content_fontWeight = textStyle.value == 0 ? "normal" : "bold";
   saveObject.content_fontColor = fontColorValue; 
   saveObject.canvasUrl = canvas.toDataURL();
+  saveObject.uploadImg = uploadImg;
 
   localStorage.setItem('saveObject', JSON.stringify(saveObject));
   localStorage.setItem('page', '1');

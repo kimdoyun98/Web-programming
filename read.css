@@ -6,6 +6,7 @@ body{
 
 header {
     margin-bottom: 10%;
+    border-bottom: 1px solid gray;
 }
 
 .header-button{
@@ -27,4 +28,26 @@ header span{
 
 #content{
     word-break:break-all;
+}
+
+.content{
+    position : absolute;
+    width: 80%;
+    height: 65%;   
+}
+.content p{
+    width: 100%;
+}
+
+#canvasImgdas{
+    position : absolute;
+    width: 80%;
+    height: 65%;
+    top:26%;
+}
+img {
+    position : absolute;
+    width: 1210px;
+    height: 73%;
+    top : 37.5%;
 }

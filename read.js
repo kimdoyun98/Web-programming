@@ -1,7 +1,8 @@
 const readData = JSON.parse(localStorage.getItem('readObject')),
       title_span = document.querySelector('.read-header span'),
-      content_p = document.getElementById('content'),
-      canvasImg = document.getElementById('canvasImg');
+      content_sp = document.getElementById('content'),
+      canvasImg = document.getElementById('canvasImg'),
+      content_div = document.getElementById('content-div');
 
 function goBack(){
     window.history.back();
@@ -15,17 +16,17 @@ title_span.appendChild(title);
 
 let text = readData.content.split('<br>');
 
-content_p.style.fontFamily = readData.content_fontFamily;
-content_p.style.fontSize = readData.content_fontSize;
-content_p.style.fontWeight = readData.content_fontWeight;
-content_p.style.color = readData.content_fontColor;
+content_sp.style.fontFamily = readData.content_fontFamily;
+content_sp.style.fontSize = readData.content_fontSize;
+content_sp.style.fontWeight = readData.content_fontWeight;
+content_sp.style.color = readData.content_fontColor;
 
 for(let i = 0; i < text.length; i++){
     let content = document.createTextNode(text[i]);
     let br = document.createElement('br');
     
-    content_p.appendChild(content);
-    content_p.appendChild(br);
+    content_sp.appendChild(content);
+    content_sp.appendChild(br);
 }
 
 // 이미지
@@ -35,3 +36,10 @@ newImage.src = readData.canvasUrl;
 
 var container = document.getElementById('canvasImg');
 container.appendChild(newImage);
+
+console.log(readData.uploadImg);
+
+if (readData.uploadImg == true){
+    console.log("uploadImg == true");
+    content_div.style.paddingTop = 200 +"px";
+}
