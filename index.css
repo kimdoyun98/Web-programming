@@ -36,15 +36,15 @@ header span{
 h2 {
     border-bottom: 1px solid gray;
     padding-left: 20px;
-    padding-top: 50px;
-    padding-bottom: 30px;
+    padding-top: 5%;
+    padding-bottom: 3%;
 }
 
 section {
     height: 100%;
     padding-bottom: 50px;
     padding-left: 40px;
-    margin-top: 18%;
+    margin-top: 20%;
 }
 
 section div{
