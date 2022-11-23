@@ -42,7 +42,7 @@ console.log(readData.uploadImg);
 if (readData.uploadImg == true){
     console.log("uploadImg == true");
     //content_div.style.paddingTop = 200 +"px";
-    content_div.style.paddingTop = 13.4 +"%";
+    content_div.style.paddingTop = 20 +"%";
     
     let img = document.getElementById('canvasImg');
     //img.style.height = "100%";
