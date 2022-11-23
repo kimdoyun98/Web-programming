@@ -5,8 +5,7 @@ body{
 }
 
 header {
-    margin-bottom: 10%;
-    border-bottom: 1px solid gray;
+    margin-bottom: 7%;
 }
 
 .header-button{
@@ -20,7 +19,7 @@ header {
 }
 
 header span{
-    font-size: 30px;
+    font-size: 60px;
     color: black;
     font-weight: 550;
     font-style: normal; 
@@ -42,12 +41,12 @@ header span{
 #canvasImgdas{
     position : absolute;
     width: 80%;
-    height: 65%;
+    height: 65%;    
     top:26%;
 }
 img {
     position : absolute;
-    width: 1210px;
+    width: 80%;
     height: 73%;
     top : 37.5%;
 }
