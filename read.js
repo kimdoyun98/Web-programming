@@ -35,7 +35,7 @@ newImage.id = 'canvasImg';
 newImage.src = readData.canvasUrl;
 
 var container = document.getElementById('canvasImg');
-document.body.appendChild(newImage);
+container.appendChild(newImage);
 
 console.log(readData.uploadImg);
 

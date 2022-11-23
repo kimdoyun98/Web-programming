@@ -45,8 +45,18 @@ header span{
     top:26%;
 }
 img {
+    /* position : absolute;
+    width: 80%;
+    height: 73%;
+    top : 28%; */
+    /* background-color: aqua; */
+}
+
+.camavasImg{
+    /* background-color: rgba(128, 128, 128, 0.5); */
+
     position : absolute;
     width: 80%;
     height: 73%;
-    top : 37.5%;
+    top : 28%;
 }
