@@ -4,6 +4,7 @@ const readData = JSON.parse(localStorage.getItem('readObject')),
       canvasImg = document.getElementById('canvasImg'),
       content_div = document.getElementById('content-div');
 
+// 뒤로가기
 function goBack(){
     window.history.back();
 }
@@ -13,7 +14,6 @@ let title = document.createTextNode(readData.title);
 title_span.appendChild(title);
 
 // 내용
-
 let text = readData.content.split('<br>');
 
 content_sp.style.fontFamily = readData.content_fontFamily;
@@ -37,14 +37,7 @@ newImage.src = readData.canvasUrl;
 var container = document.getElementById('canvasImg');
 container.appendChild(newImage);
 
-console.log(readData.uploadImg);
 
 if (readData.uploadImg == true){
-    console.log("uploadImg == true");
-    //content_div.style.paddingTop = 200 +"px";
     content_div.style.paddingTop = 20 +"%";
-    
-    let img = document.getElementById('canvasImg');
-    //img.style.height = "100%";
-    //img.style.visibility = "hidden";
 }

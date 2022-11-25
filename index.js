@@ -3,6 +3,7 @@ let saveObject = JSON.parse(localStorage.getItem('saveObject'));
 let saveObjectList = JSON.parse(localStorage.getItem('saveObjectList'));
 let objectList = [];
 
+//LocalStorage에 저장 목록 저장
 if (saveObjectList == null && saveObject != null){ // 첫 추가
     objectList.push(saveObject);
     localStorage.setItem('saveObjectList', JSON.stringify(objectList));
@@ -23,6 +24,7 @@ else{
     localStorage.setItem('page', '0');
 }
 
+// 목록
 const section = document.getElementById("index-section");
 
 for(let i = 0; i < objectList.length; i++){
@@ -48,14 +50,11 @@ for(let i = 0; i < objectList.length; i++){
     section.appendChild(div);
 }
 
+// 선택한 목록에 해당하는 정보와 함께 상세 페이지로 전환
 let listBtn = document.querySelectorAll(".saveContent");
 listBtn.forEach((btn) => {
     btn.addEventListener("click", () => {
-        console.log(btn.id);
-        console.log(objectList[btn.id]);
-
         localStorage.setItem('readObject', JSON.stringify(objectList[btn.id]));
-        console.log(JSON.parse(localStorage.getItem('readObject')));
         location.href='read.html';
     });
 });

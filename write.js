@@ -5,16 +5,19 @@ function goBack(){
 const textArea = document.getElementById("textarea"),
       textTitle = document.getElementById("title");
 
+// 폰트 변경
 function changeFontFamily() {
     let fontfamily = document.getElementById("font-family").value;
     textArea.style.fontFamily = fontfamily;
   }
 
+  //폰트 사이즈 변경
 function changeFontSize(){
     let fontSize = document.getElementById("font-size").value;
     textArea.style.fontSize = fontSize+"px";
 }
 
+// 글씨 굵기 변경
 function onClickTextStyle(){
     let textStyle = document.getElementById("text-font-style");
     if(textStyle.value == 0){
@@ -29,6 +32,7 @@ function onClickTextStyle(){
     }
 }
 
+//글씨 색 변경
 function changeFontColor(){
     let fontColorValue = document.getElementById("text-font-color").value;
     textArea.style.color = fontColorValue;
@@ -190,13 +194,14 @@ const drawRect = (e) => {
 function loadFile(input) {
     var file = input.files[0];	//선택된 파일 가져오기
 
-    let img = new Image();
-    img.src = URL.createObjectURL(file);  
+    let img = new Image(); // 이미지 객체 생성
+    img.src = URL.createObjectURL(file);  // 불러온 파일 img src에 적용
 
-    img.onload = function (){
+    img.onload = function (){ // 이미지 캔버스에 적용
         context.drawImage(img, 200, 10, canvas.width - 400, 280);
     }
 
+    // 이미지 크기만큼 캔버스 크기 및 textarea 위치 변경
     textArea_div.style.paddingTop = 300 +"px";
     drawingBoard.style.height = 105+"%";
     uploadImg = true; 
@@ -212,9 +217,11 @@ saveImg.addEventListener("click", () => {
       textStyle = document.getElementById("text-font-style")
       fontColorValue = document.getElementById("text-font-color").value;
 
+  // Enter(\n) -> <br>로 변경
   let text = textArea.value;
       text = text.replaceAll(/(\n|\r\n)/g, "<br>");
 
+  // 객체 생성
   let saveObject = new Object();
   saveObject.title = textTitle.value;
   saveObject.content = text;
@@ -222,9 +229,10 @@ saveImg.addEventListener("click", () => {
   saveObject.content_fontSize = fontSize + "px";
   saveObject.content_fontWeight = textStyle.value == 0 ? "normal" : "bold";
   saveObject.content_fontColor = fontColorValue; 
-  saveObject.canvasUrl = canvas.toDataURL();
+  saveObject.canvasUrl = canvas.toDataURL(); //캔버스 이미지 URL (base64)
   saveObject.uploadImg = uploadImg;
 
+  // 객체를 LocalStorage(저장소)에 JSON으로 변환하여 저장
   localStorage.setItem('saveObject', JSON.stringify(saveObject));
   localStorage.setItem('page', '1');
   location.href='index.html';
