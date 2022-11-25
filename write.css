@@ -46,6 +46,20 @@ body{
 /* 
     Tool 
 */
+.tools{
+    display:flex;
+}
+
+.tools span{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.vertical-line{
+    border-right: 1px solid gray;
+    height : 50px;
+}
+
 ul {
     list-style: none;
     padding-left: 0px ;
@@ -60,11 +74,6 @@ input, button, li label{
     cursor: pointer;
 }
 
-.tool-column{
-    border-right: 1px solid gray;
-    padding-right: 20px;
-    padding-left: 20px;
-}
 .option:is(:hover, .active) img { 
     filter: invert(17%) sepia(90%) saturate(3000%) hue-rotate(900deg)
       brightness(100%) contrast(100%);
@@ -72,19 +81,6 @@ input, button, li label{
 
 .option:is(:hover, .active) :where(span, label) {
     color: #4a98f7;
-}
-
-.tools span{
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.tools{
-    display:flex;
-}
-
-.tools div{
-    margin-right: 10px;
 }
 
 
