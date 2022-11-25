@@ -55,6 +55,11 @@ body{
     font-weight: bold;
 }
 
+.tools div{
+    margin: auto;
+}
+
+
 .vertical-line{
     border-right: 1px solid gray;
     height : 50px;
@@ -67,6 +72,14 @@ ul {
 li{
     float: left;
     margin-right: 15px;
+    cursor: pointer;
+}
+
+.input-image {
+    padding: 2px 2px;
+    border-radius: 4px;
+    color: black;
+    font-weight: bold;
     cursor: pointer;
 }
 
@@ -161,16 +174,4 @@ select {
     background-color: white;
     border: 0;
     outline: 0;
-}
-
-.input-image {
-    padding: 2px 2px;
-    background-color:gray;
-    border-radius: 4px;
-    color: white;
-    cursor: pointer;
-}
-
-.tools div{
-    margin: auto;
 }
